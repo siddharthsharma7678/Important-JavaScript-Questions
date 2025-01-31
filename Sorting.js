@@ -104,3 +104,46 @@ function quickSort(arr){
 }
 
 // console.log(quickSort(arr))
+
+function HeapSort(arr){
+    let length = arr.length;
+
+    // Build the heap
+
+    for(let i = Math.floor(length / 2);i >=0; i--){
+        Heapify(arr,length,i);
+    }
+
+    // Extract the element one by one from the heap
+
+    for(let i = length - 1; i > 0;i--){
+        let temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        Heapify(arr,i,0)
+    }
+    return arr;
+}
+function Heapify(arr,length1,root){
+    let left = root * 2 + 1;
+    let right = root * 2 + 2;
+    let largest = root;
+    // compare the left child
+    if(left < length1 && arr[left] > arr[largest]){
+        largest = left
+    }
+    // compare the right child
+    if(right < length1 && arr[right] > arr[largest]){
+        largest = right;
+    }
+
+    if(largest !== root){
+        let temp = arr[largest];
+        arr[largest] = arr[root];
+        arr[root] = temp;
+
+        Heapify(arr,length1,largest);
+    }
+}
+
+// console.log(HeapSort(arr))
